@@ -34,6 +34,8 @@ public:
     char getChar() const;
     const sf::Color &getColor() const;
 
+    void setColor (const sf::Color &color);
+
     static char charByType(const ObjectType &type);
     static sf::Color colorByType(const ObjectType &type);
     static ObjectType typeByChar(char ch);

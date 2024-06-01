@@ -6,6 +6,8 @@ Object::ObjectType Object::getType() const { return m_type; }
 char Object::getChar() const { return m_char; }
 const sf::Color &Object::getColor() const { return m_color; }
 
+void Object::setColor(const sf::Color &color) { m_color = color; }
+
 char Object::charByType(const ObjectType &type) {
     switch (type) {
         case EMPTY: return '.';

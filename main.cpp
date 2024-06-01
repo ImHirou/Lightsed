@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Cell.h"
 #include "Object.h"
 #include "Map.h"
@@ -56,7 +57,10 @@ int main() {
             }
         }
 
-        if(1.0/map.getTPS() >= clock.getElapsedTime().asSeconds()) map.tick();
+        if(1.0/map.getTPS() <= clock.getElapsedTime().asSeconds()) {
+            map.tick();
+            clock.restart();
+        }
 
         window.clear(Color::Black);
         map.draw(window, font);

@@ -3,9 +3,10 @@
 #include "Object.h"
 #include "constants.h"
 #include "SFML/Graphics.hpp"
+#include <cmath>
 #include <iostream>
 
-Map::Map() : m_player(Player(17, 25, 100000)), m_tps(20) {
+Map::Map() : m_player(Player(17, 25, 10000000)), m_tps(20) {
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
             m_cells[i][j] = Cell(Object(Object::typeByChar(Constants::mapLayer1[i][j])), Locked(Object::typeByChar(Constants::mapLayer2[i][j])));
@@ -22,7 +23,7 @@ void Map::drawEmptyCell(sf::RenderWindow &window, int x, int y, sf::Font &font) 
     text.setString("#");
     text.setCharacterSize(Constants::characterSize);
     text.setPosition(x*Constants::characterSize, y*Constants::characterSize);
-    text.setColor(sf::Color(40, 40, 40));
+    text.setColor(sf::Color(10, 10, 10));
     window.draw(text);
 }
 
@@ -60,5 +61,10 @@ void Map::movePlayer() {
 }
 
 void Map::tick() {
-    movePlayer();
+    int lightLevel = log2(m_player.getLight());
+    for(int i=0; i<50; ++i) {
+        for(int j=0; j<50; ++j) {
+            m_cells[i][j].changeLightLevel(lightLevel);
+        }
+    }
 }

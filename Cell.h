@@ -24,6 +24,7 @@ public:
     bool isLocked() const;
     void unlockCell(Player &player);
     void drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
+    void changeLightLevel(int lightLevel);
 
 };
 
