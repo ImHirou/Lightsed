@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include "ctime"
+#include "cstdlib"
 #include "Cell.h"
 #include "Object.h"
 #include "Map.h"
@@ -9,6 +10,9 @@ using namespace sf;
 static Font font;
 
 int main() {
+
+    srand(time(0));
+    rand();
 
     RenderWindow window(VideoMode(830, 840), "Lightsed!");
 

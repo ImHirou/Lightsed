@@ -3,44 +3,72 @@
 #include "SFML/Graphics.hpp"
 #include "constants.h"
 #include <cmath>
-#include <iostream>
+#include "BaseObject.h"
 
 Cell::Cell() {
     m_layer1 = Object();
-    m_layer2 = Locked();
+    m_layer2 = Object();
 }
 
-bool Cell::canUnlockCell(const Player &player) const {
-    return player.getLight() >= m_layer2.getCost();
+bool Cell::canUnlockCell(const Player &player){
+    Locked lock = m_layer2;
+    return player.getLight() >= lock.getCost();
 }
 
 bool Cell::isLocked() const {
-    return m_layer2.getType() != Object::EMPTY;
+    switch (m_layer2.getType()) {
+        case BaseObject::ONE:
+        case BaseObject::TWO:
+        case BaseObject::THREE:
+        case BaseObject::FOUR:
+        case BaseObject::FIVE:
+        case BaseObject::SIX:
+        case BaseObject::SEVEN:
+        case BaseObject::EIGHT:
+        case BaseObject::NINE:
+            return true;
+        default:
+            return false;
+    }
+}
+
+bool Cell::isLight() const {
+    return m_layer2.getType() == BaseObject::LIGHT;
 }
 
 void Cell::unlockCell(Player &player) {
     if(!isLocked()) return;
-    player.reduceLight(m_layer2.getCost());
-    m_layer2 = Locked();
+    Locked lock = m_layer2;
+    player.reduceLight(lock.getCost());
+    m_layer2 = Object();
 }
 
 void Cell::drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font) {
     sf::Text text;
     text.setFont(font);
-    text.setString(m_layer2.getChar());
-    text.setCharacterSize(Constants::characterSize);
-    text.setPosition(x*Constants::characterSize, y*Constants::characterSize);
-    text.setColor(m_layer2.getColor());
+    if(isLocked() || isLight()) {
+        text.setString(m_layer2.getChar());
+        text.setCharacterSize(Constants::characterSize);
+        text.setPosition(x * Constants::characterSize, y * Constants::characterSize);
+        text.setColor(m_layer2.getColor());
+    }
+    else {
+        text.setString(m_layer1.getChar());
+        text.setCharacterSize(Constants::characterSize);
+        text.setPosition(x * Constants::characterSize, y * Constants::characterSize);
+        text.setColor(m_layer1.getColor());
+    }
     window.draw(text);
 }
 
 void Cell::changeLightLevel(int lightLevel) {
+    if(m_layer2.getType() == BaseObject::LIGHT) return;
     if(lightLevel<=0) {
         m_layer1.setColor(sf::Color(2, 2, 2));
         m_layer2.setColor(sf::Color(2, 2, 2));
         return;
     }
-    sf::Color baseColor = Object::colorByType(m_layer2.getType());
+    sf::Color baseColor = BaseObject::colorByType(m_layer2.getType());
     double r = (baseColor.r * sqrt(lightLevel)) / (log2(baseColor.r) / (log10(lightLevel+1))+1);
     double g = (baseColor.g * sqrt(lightLevel)) / (log2(baseColor.g) / (log10(lightLevel+1))+1);
     double b = (baseColor.b * sqrt(lightLevel)) / (log2(baseColor.b) / (log10(lightLevel+1))+1);
@@ -50,5 +78,10 @@ void Cell::changeLightLevel(int lightLevel) {
     if(r < 0) r = 2;
     if(g < 0) g = 2;
     if(b < 0) b = 2;
+    m_layer1.setColor(sf::Color(r,g,b));
     m_layer2.setColor(sf::Color(r,g,b));
+}
+
+void Cell::makeEmpty() {
+    m_layer2 = Object();
 }

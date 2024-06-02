@@ -24,14 +24,18 @@ void Player::draw(sf::RenderWindow &window, int x, int y, sf::Font &font) {
 }
 
 void Player::moveBy(int x, int y, Cell &cell) {
-    std::cout << cell.isLocked() << "\n";
     if(cell.isLocked()) {
         if(cell.canUnlockCell(*this)) {
             cell.unlockCell(*this);
         }
     }
     else {
+        if(cell.isLight()) {
+            m_light++;
+            cell.makeEmpty();
+        }
         m_x += x;
         m_y += y;
     }
+    std::cout << m_light << "\n";
 }

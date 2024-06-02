@@ -12,19 +12,20 @@ class Player;
 class Cell {
 private:
     Object m_layer1;
-    Locked m_layer2;
+    Object m_layer2;
 public:
     Cell();
-    Cell(Object layer1, Locked layer2) :
+    Cell(Object layer1, Object layer2) :
             m_layer1(layer1), m_layer2(layer2) {
-
     }
 
-    bool canUnlockCell(const Player &player) const;
+    bool canUnlockCell(const Player &player);
     bool isLocked() const;
+    bool isLight() const;
     void unlockCell(Player &player);
     void drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void changeLightLevel(int lightLevel);
+    void makeEmpty();
 
 };
 

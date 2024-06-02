@@ -10,9 +10,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Lightsed main.cpp
         Cell.h
-        Object.h
         Player.h
-        Object.cpp
         Locked.h
         Locked.cpp
         Cell.cpp
@@ -20,6 +18,11 @@ add_executable(Lightsed main.cpp
         Map.h
         Map.cpp
         Player.cpp
+        Light.h
+        BaseObject.h
+        BaseObject.cpp
+        Object.h
+        Object.cpp
 )
 
 target_link_libraries(Lightsed sfml-system)

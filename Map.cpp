@@ -1,15 +1,16 @@
 #include "Map.h"
 #include "Cell.h"
 #include "Object.h"
+#include "Light.h"
 #include "constants.h"
 #include "SFML/Graphics.hpp"
 #include <cmath>
 #include <iostream>
 
-Map::Map() : m_player(Player(17, 25, 100000000)), m_tps(20) {
+Map::Map() : m_player(Player(17, 25, 1)), m_tps(20) {
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
-            m_cells[i][j] = Cell(Object(Object::typeByChar(Constants::mapLayer1[i][j])), Locked(Object::typeByChar(Constants::mapLayer2[i][j])));
+            m_cells[i][j] = Cell(Object(Object::typeByChar(Constants::mapLayer1[i][j])), Object(Object::typeByChar(Constants::mapLayer2[i][j])));
         }
     }
 }
@@ -36,7 +37,6 @@ void Map::draw(sf::RenderWindow &window, sf::Font &font) {
     int y = m_player.getY();
     for(int i = x-15; i < x+15; ++i) {
         for(int j = y-15; j < y+15; ++j) {
-            //std::cout << i << " " << j << "\n";
             if(i == x && j == y) {
                 m_player.draw(window, 0+(i-(x-15)), 0+(j-(y-15)), font);
             }
@@ -69,6 +69,8 @@ void Map::tick() {
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
             m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
+            if(!m_cells[i][j].isLocked())
+                if(rand() % 1000 <= 1) m_cells[i][j] = Cell(Object(), Object(BaseObject::LIGHT));
         }
     }
 }
