@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include "constants.h"
 #include <cmath>
+#include <iostream>
 
 Cell::Cell() {
     m_layer1 = Object();
@@ -34,17 +35,20 @@ void Cell::drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font) {
 }
 
 void Cell::changeLightLevel(int lightLevel) {
-    if(lightLevel<0) {
-        m_layer1.setColor(sf::Color(5, 5, 5));
-        m_layer2.setColor(sf::Color(5, 5, 5));
+    if(lightLevel<=0) {
+        m_layer1.setColor(sf::Color(2, 2, 2));
+        m_layer2.setColor(sf::Color(2, 2, 2));
         return;
     }
     sf::Color baseColor = Object::colorByType(m_layer2.getType());
-    int r=baseColor.r-(baseColor.r/(lightLevel+1))+lightLevel;
-    int g=baseColor.g-(baseColor.g/(lightLevel+1))+lightLevel;
-    int b=baseColor.b-(baseColor.b/(lightLevel+1))+lightLevel;
-    if(r>255) r=255;
-    if(g>255) g=255;
-    if(b>255) b=255;
+    double r = (baseColor.r * sqrt(lightLevel)) / (log2(baseColor.r) / (log10(lightLevel+1))+1);
+    double g = (baseColor.g * sqrt(lightLevel)) / (log2(baseColor.g) / (log10(lightLevel+1))+1);
+    double b = (baseColor.b * sqrt(lightLevel)) / (log2(baseColor.b) / (log10(lightLevel+1))+1);
+    if(r > 255) r = 255;
+    if(g > 255) g = 255;
+    if(b > 255) b = 255;
+    if(r < 0) r = 2;
+    if(g < 0) g = 2;
+    if(b < 0) b = 2;
     m_layer2.setColor(sf::Color(r,g,b));
 }

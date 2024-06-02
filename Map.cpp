@@ -6,12 +6,16 @@
 #include <cmath>
 #include <iostream>
 
-Map::Map() : m_player(Player(17, 25, 10000000)), m_tps(20) {
+Map::Map() : m_player(Player(17, 25, 100000000)), m_tps(20) {
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
             m_cells[i][j] = Cell(Object(Object::typeByChar(Constants::mapLayer1[i][j])), Locked(Object::typeByChar(Constants::mapLayer2[i][j])));
         }
     }
+}
+
+double distance(double x1, double y1, double x2, double y2) {
+    return std::sqrt(std::pow((x2 - x1), 2) + std::pow((y2 - y1), 2));
 }
 
 Player& Map::getPlayer() { return m_player; }
@@ -23,7 +27,7 @@ void Map::drawEmptyCell(sf::RenderWindow &window, int x, int y, sf::Font &font) 
     text.setString("#");
     text.setCharacterSize(Constants::characterSize);
     text.setPosition(x*Constants::characterSize, y*Constants::characterSize);
-    text.setColor(sf::Color(10, 10, 10));
+    text.setColor(sf::Color(7, 7, 7));
     window.draw(text);
 }
 
@@ -64,7 +68,7 @@ void Map::tick() {
     int lightLevel = log2(m_player.getLight());
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
-            m_cells[i][j].changeLightLevel(lightLevel);
+            m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
         }
     }
 }
