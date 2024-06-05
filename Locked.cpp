@@ -1,9 +1,4 @@
 #include "Locked.h"
-#include "Object.h"
-
-Locked::operator Object() {
-    return Object(m_type);
-}
 
 long long Locked::getCost() const { return m_cost; }
 

@@ -2,7 +2,6 @@
 #include "ctime"
 #include "cstdlib"
 #include "Cell.h"
-#include "Object.h"
 #include "Map.h"
 #include "constants.h"
 

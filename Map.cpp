@@ -1,16 +1,18 @@
 #include "Map.h"
 #include "Cell.h"
-#include "Object.h"
+#include "BaseObject.h"
 #include "Light.h"
 #include "constants.h"
 #include "SFML/Graphics.hpp"
 #include <cmath>
 #include <iostream>
 
-Map::Map() : m_player(Player(17, 25, 1)), m_tps(20) {
+Map::Map() : m_player(Player(17, 25, 1000000)), m_tps(20) {
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
-            m_cells[i][j] = Cell(Object(Object::typeByChar(Constants::mapLayer1[i][j])), Object(Object::typeByChar(Constants::mapLayer2[i][j])));
+            auto layer1 = std::make_unique<BaseObject>(BaseObject::typeByChar(Constants::mapLayer1[i][j]));
+            auto layer2 = std::make_unique<Locked>(BaseObject::typeByChar(Constants::mapLayer2[i][j]));
+            m_cells[i][j] = Cell(std::move(layer1), std::move(layer2));
         }
     }
 }
@@ -70,7 +72,7 @@ void Map::tick() {
         for(int j=0; j<50; ++j) {
             m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
             if(!m_cells[i][j].isLocked())
-                if(rand() % 1000 <= 1) m_cells[i][j] = Cell(Object(), Object(BaseObject::LIGHT));
+                if(rand() % 10000 <= 1) m_cells[i][j].makeLight();
         }
     }
 }

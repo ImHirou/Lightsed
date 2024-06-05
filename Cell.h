@@ -1,22 +1,22 @@
-
 #ifndef LIGHTSED_CELL_H
 #define LIGHTSED_CELL_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Object.h"
+#include "BaseObject.h"
 #include "Locked.h"
 #include "SFML/Graphics/Font.hpp"
+#include <memory>
 
 class Player;
 
 class Cell {
 private:
-    Object m_layer1;
-    Object m_layer2;
+    std::unique_ptr<BaseObject> m_layer1;
+    std::unique_ptr<BaseObject> m_layer2;
 public:
     Cell();
-    Cell(Object layer1, Object layer2) :
-            m_layer1(layer1), m_layer2(layer2) {
+    Cell(std::unique_ptr<BaseObject> layer1, std::unique_ptr<BaseObject> layer2) :
+            m_layer1(std::move(layer1)), m_layer2(std::move(layer2)) {
     }
 
     bool canUnlockCell(const Player &player);
@@ -26,6 +26,7 @@ public:
     void drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void changeLightLevel(int lightLevel);
     void makeEmpty();
+    void makeLight();
 
 };
 

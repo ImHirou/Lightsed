@@ -19,7 +19,7 @@ void Player::draw(sf::RenderWindow &window, int x, int y, sf::Font &font) {
     text.setString(Constants::playerChar);
     text.setCharacterSize(Constants::characterSize);
     text.setPosition(x*Constants::characterSize, y*Constants::characterSize);
-    text.setColor(Object::colorByType(ObjectType::PLAYER));
+    text.setColor(BaseObject::colorByType(BaseObject::PLAYER));
     window.draw(text);
 }
 

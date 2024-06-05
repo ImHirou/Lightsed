@@ -13,8 +13,6 @@ public:
         m_cost = costByType(type);
     }
 
-    operator Object();
-
     long long getCost() const;
 
     static long long costByType(const ObjectType &type);

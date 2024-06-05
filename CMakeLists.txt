@@ -21,8 +21,6 @@ add_executable(Lightsed main.cpp
         Light.h
         BaseObject.h
         BaseObject.cpp
-        Object.h
-        Object.cpp
 )
 
 target_link_libraries(Lightsed sfml-system)

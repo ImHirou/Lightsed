@@ -1,12 +1,11 @@
 #ifndef LIGHTSED_PLAYER_H
 #define LIGHTSED_PLAYER_H
 
-#include "Object.h"
 #include "Cell.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
 
-class Player : public Object{
+class Player : public BaseObject{
 public:
     enum Key {
         Key_W,
@@ -22,7 +21,7 @@ private:
     bool m_keyPressed[TOTAL_KEYS] {};
 public:
     Player(int x=0, int y=0, long long light=0) :
-            Object(PLAYER), m_x(x), m_y(y), m_light(light) {
+            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light) {
         for(int i = 0; i < static_cast<int>(TOTAL_KEYS); ++i) m_keyPressed[static_cast<Key>(i)] = false;
     }
 

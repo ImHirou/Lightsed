@@ -9,8 +9,6 @@ class Light : public BaseObject {
 public:
     Light() : BaseObject(ObjectType::LIGHT) {}
 
-    operator Object();
-
 };
 
 #endif //LIGHTSED_LIGHT_H
