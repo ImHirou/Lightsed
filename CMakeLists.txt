@@ -21,6 +21,12 @@ add_executable(Lightsed main.cpp
         Light.h
         BaseObject.h
         BaseObject.cpp
+        Button.h
+        Point.h
+        Point.cpp
+        Button.cpp
+        UpgradeButton.h
+        Light.cpp
 )
 
 target_link_libraries(Lightsed sfml-system)

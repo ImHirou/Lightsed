@@ -6,8 +6,13 @@
 class Object;
 
 class Light : public BaseObject {
+protected:
+    long long m_light;
 public:
-    Light() : BaseObject(ObjectType::LIGHT) {}
+    explicit Light(long long light=1) : BaseObject(ObjectType::LIGHT), m_light(light) {}
+
+    void setLight(long long light);
+    long long getLight() const;
 
 };
 

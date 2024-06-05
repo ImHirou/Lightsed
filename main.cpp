@@ -64,7 +64,6 @@ int main() {
             map.tick();
             clock.restart();
         }
-
         window.clear(Color::Black);
         map.draw(window, font);
         window.display();
