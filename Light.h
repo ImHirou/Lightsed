@@ -14,6 +14,8 @@ public:
     void setLight(long long light);
     long long getLight() const;
 
+    void calculateLight(int x, int y);
+
 };
 
 #endif //LIGHTSED_LIGHT_H

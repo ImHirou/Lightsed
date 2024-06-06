@@ -27,6 +27,8 @@ add_executable(Lightsed main.cpp
         Button.cpp
         UpgradeButton.h
         Light.cpp
+        UpgradeButton.cpp
+        Upgrades.h
 )
 
 target_link_libraries(Lightsed sfml-system)

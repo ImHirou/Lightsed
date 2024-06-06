@@ -16,22 +16,27 @@ public:
     };
 private:
     long long m_light;
+    long long m_multi;
     int m_x;
     int m_y;
     bool m_keyPressed[TOTAL_KEYS] {};
 public:
     Player(int x=0, int y=0, long long light=0) :
-            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light) {
+            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light), m_multi(1) {
         for(int i = 0; i < static_cast<int>(TOTAL_KEYS); ++i) m_keyPressed[static_cast<Key>(i)] = false;
     }
 
     int getX() const;
     int getY() const;
     long long getLight() const;
+    long long getMulti() const;
 
     void reduceLight(long long n);
+    void addLight(long long n);
+    void addMulti(long long n);
 
     void setKey(Key key, bool p);
+    void setMulti(long long mult);
 
     void draw(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void moveBy(int x, int y, Cell &cell);

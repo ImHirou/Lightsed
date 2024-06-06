@@ -6,12 +6,16 @@
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 long long Player::getLight() const { return m_light; }
+long long Player::getMulti() const { return m_multi; }
 
 void Player::reduceLight(long long n) { m_light-=n; }
+void Player::addLight(long long n) { m_light+=n; }
+void Player::addMulti(long long n) { m_multi+=n; }
 
 bool Player::isKeyPressed(Player::Key key) const { return m_keyPressed[key]; }
 
 void Player::setKey(Player::Key key, bool p) { m_keyPressed[key] = p;}
+void Player::setMulti(long long mult) { m_multi = mult; }
 
 void Player::draw(sf::RenderWindow &window, int x, int y, sf::Font &font) {
     sf::Text text;
