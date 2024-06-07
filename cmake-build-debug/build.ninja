@@ -137,6 +137,14 @@ build CMakeFiles/Lightsed.dir/Tab.cpp.obj: CXX_COMPILER__Lightsed_unscanned_Debu
   OBJECT_DIR = CMakeFiles\Lightsed.dir
   OBJECT_FILE_DIR = CMakeFiles\Lightsed.dir
 
+build CMakeFiles/Lightsed.dir/Upgrades.cpp.obj: CXX_COMPILER__Lightsed_unscanned_Debug F$:/MyCodes/Lightsed/Upgrades.cpp || cmake_object_order_depends_target_Lightsed
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Lightsed.dir\Upgrades.cpp.obj.d
+  FLAGS = -g -std=gnu++2a -fdiagnostics-color=always
+  INCLUDES = -IF:/MyCodes/Lightsed/cmake-build-debug/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\Lightsed.dir
+  OBJECT_FILE_DIR = CMakeFiles\Lightsed.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Lightsed
@@ -145,7 +153,7 @@ build CMakeFiles/Lightsed.dir/Tab.cpp.obj: CXX_COMPILER__Lightsed_unscanned_Debu
 #############################################
 # Link the executable Lightsed.exe
 
-build Lightsed.exe: CXX_EXECUTABLE_LINKER__Lightsed_Debug CMakeFiles/Lightsed.dir/main.cpp.obj CMakeFiles/Lightsed.dir/Locked.cpp.obj CMakeFiles/Lightsed.dir/Cell.cpp.obj CMakeFiles/Lightsed.dir/Map.cpp.obj CMakeFiles/Lightsed.dir/Player.cpp.obj CMakeFiles/Lightsed.dir/BaseObject.cpp.obj CMakeFiles/Lightsed.dir/Point.cpp.obj CMakeFiles/Lightsed.dir/Button.cpp.obj CMakeFiles/Lightsed.dir/Light.cpp.obj CMakeFiles/Lightsed.dir/UpgradeButton.cpp.obj CMakeFiles/Lightsed.dir/Tab.cpp.obj | _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build Lightsed.exe: CXX_EXECUTABLE_LINKER__Lightsed_Debug CMakeFiles/Lightsed.dir/main.cpp.obj CMakeFiles/Lightsed.dir/Locked.cpp.obj CMakeFiles/Lightsed.dir/Cell.cpp.obj CMakeFiles/Lightsed.dir/Map.cpp.obj CMakeFiles/Lightsed.dir/Player.cpp.obj CMakeFiles/Lightsed.dir/BaseObject.cpp.obj CMakeFiles/Lightsed.dir/Point.cpp.obj CMakeFiles/Lightsed.dir/Button.cpp.obj CMakeFiles/Lightsed.dir/Light.cpp.obj CMakeFiles/Lightsed.dir/UpgradeButton.cpp.obj CMakeFiles/Lightsed.dir/Tab.cpp.obj CMakeFiles/Lightsed.dir/Upgrades.cpp.obj | _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
   FLAGS = -g
   LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-system-s-d.a  _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lwinmm  -lopengl32  -lgdi32  _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Lightsed.dir

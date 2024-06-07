@@ -4,7 +4,6 @@
 #include "cstdlib"
 #include "Map.h"
 #include "constants.h"
-#include "Button.h"
 #include "Tab.h"
 
 using namespace sf;
@@ -28,6 +27,14 @@ int main() {
         while(window.pollEvent(event)) {
             if(event.type == Event::Closed)
                 window.close();
+            if(event.type == Event::MouseButtonPressed) {
+                if(event.mouseButton.button == Mouse::Left) {
+                    UpgradeButton* button = dynamic_cast<UpgradeButton*>(tab.getButtons()[0]);
+                    if(button->isHovered() && tab.isOpen()) {
+                        button->buy(map.getPlayer());
+                    }
+                }
+            }
             if(event.type == Event::KeyPressed) {
                 if(event.key.code == Keyboard::W) {
                     map.getPlayer().setKey(Player::Key_W, true);
@@ -44,6 +51,9 @@ int main() {
                 if(event.key.code == Keyboard::D) {
                     map.getPlayer().setKey(Player::Key_D, true);
                     map.movePlayer();
+                }
+                if(event.key.code == Keyboard::Q) {
+                    tab.setOpen(!tab.isOpen());
                 }
             }
             if(event.type == Event::KeyReleased) {
@@ -65,11 +75,12 @@ int main() {
 
         if(1.0/map.getTPS() <= clock.getElapsedTime().asSeconds()) {
             map.tick();
+            tab.checkHover(event.mouseMove.x, event.mouseMove.y);
             clock.restart();
         }
         window.clear(Color::Black);
         map.draw(window, font);
-        tab.draw(window, font);
+        if(tab.isOpen()) tab.draw(window, font);
         window.display();
 
     }

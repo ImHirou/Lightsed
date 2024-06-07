@@ -2,9 +2,12 @@
 #include "Tab.h"
 #include "constants.h"
 
-Button* Tab::getButtons() { return m_buttons; }
+Button** Tab::getButtons() { return m_buttons; }
 Point& Tab::getPos1() { return m_pos1; }
 Point& Tab::getPos2() { return m_pos2; }
+bool Tab::isOpen() const { return m_open; }
+
+void Tab::setOpen(bool o) { m_open = o; }
 
 void Tab::draw(sf::RenderWindow &window, sf::Font &font) {
     float xs = (m_pos2.getX()-m_pos1.getX());
@@ -26,6 +29,12 @@ void Tab::draw(sf::RenderWindow &window, sf::Font &font) {
     window.draw(rect);
     window.draw(text);
     for(int i=0; i<1; i++) {
-        m_buttons[i].draw(window, font, m_pos1.getX(), m_pos1.getY());
+        m_buttons[i]->draw(window, font);
+    }
+}
+
+void Tab::checkHover(int x, int y) {
+    for(int i=0; i<1; i++) {
+        m_buttons[i]->setHovered(m_buttons[i]->isCollide(x, y));
     }
 }

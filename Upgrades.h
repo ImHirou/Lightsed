@@ -3,8 +3,6 @@
 
 #include "UpgradeButton.h"
 
-void UpgradeFunc1(UpgradeButton& but, Player& player) {
-    but.setCost(but.getCost()*2);
-}
+void UpgradeFunc1(UpgradeButton& but, Player& player);
 
 #endif //LIGHTSED_UPGRADES_H

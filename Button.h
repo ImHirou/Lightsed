@@ -40,7 +40,7 @@ public:
     bool isCollide(double x, double y) const;
     bool isHovered() const;
 
-    virtual void draw(sf::RenderWindow &window, sf::Font &font, float x=0, float y=0);
+    virtual void draw(sf::RenderWindow &window, sf::Font &font);
 
 };
 

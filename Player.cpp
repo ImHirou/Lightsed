@@ -35,7 +35,7 @@ void Player::moveBy(int x, int y, Cell &cell) {
     }
     else {
         if(cell.isLight()) {
-            m_light++;
+            m_light+=m_multi;
             cell.makeEmpty();
         }
         m_x += x;

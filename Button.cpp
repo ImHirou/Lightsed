@@ -50,7 +50,7 @@ bool Button::isCollide(double x, double y) const{
 
 bool Button::isHovered() const { return m_hovered; }
 
-void Button::draw(sf::RenderWindow &window, sf::Font& font, float x, float y) {
+void Button::draw(sf::RenderWindow &window, sf::Font& font) {
     float xs = (m_pos2.getX()-m_pos1.getX());
     float ys = (m_pos2.getY()-m_pos1.getY());
     sf::RectangleShape rect(sf::Vector2f(xs, ys), sf::Vector2f());
@@ -58,7 +58,7 @@ void Button::draw(sf::RenderWindow &window, sf::Font& font, float x, float y) {
     text.setFont(font);
     text.setString(m_title);
     text.setCharacterSize(Constants::characterSize);
-    text.setPosition(m_pos1.getX()+10+Constants::characterSize+x, m_pos1.getX()+5+Constants::characterSize+y);
+    text.setPosition(m_pos1.getX()+10, m_pos1.getX()+5);
     if(m_hovered) {
         rect.setOutlineThickness(4);
         rect.setFillColor(sf::Color(30, 30, 30));
@@ -71,7 +71,7 @@ void Button::draw(sf::RenderWindow &window, sf::Font& font, float x, float y) {
         rect.setOutlineColor(sf::Color(160, 160, 160));
         text.setFillColor(sf::Color(200, 200, 200));
     }
-    rect.setPosition(m_pos1.getX()+x, m_pos1.getY()+y);
+    rect.setPosition(m_pos1.getX(), m_pos1.getY());
     window.draw(rect);
     window.draw(text);
 }
