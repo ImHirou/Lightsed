@@ -9,15 +9,20 @@ private:
     Button **m_buttons;
     Point m_pos1;
     Point m_pos2;
+    int m_totalButtons;
     bool m_open;
 public:
-    Tab(const Point &pos1, const Point &pos2, const std::string& title) : m_pos1(pos1), m_pos2(pos2), m_title(title), m_open(false) {
-        m_buttons = new Button*[1];
-        m_buttons[0] = new UpgradeButton(100+pos1.getX(), 100+pos1.getY(), 400+pos1.getX(), 200+pos1.getY(), "Hellow", 100, 2, UpgradeFunc1);
+    Tab(Point& pos1, Point& pos2, const std::string& title, BaseObject::ObjectType type=BaseObject::EMPTY) :
+        m_pos1(pos1), m_pos2(pos2), m_title(title), m_open(false), m_totalButtons(buttonsNumByType(type)) {
+        initButtonsByType(type);
+    }
+    Tab(int x1, int y1, int x2, int y2, const std::string& title, BaseObject::ObjectType type=BaseObject::EMPTY) :
+        m_pos1(x1, y1), m_pos2(x2, y2), m_title(title), m_open(false), m_totalButtons(buttonsNumByType(type)) {
+        initButtonsByType(type);
     }
 
     virtual ~Tab() {
-        delete m_buttons[0];
+        for(int i=0; i<m_totalButtons; i++) delete m_buttons[i];
         delete[] m_buttons;
     }
 
@@ -25,6 +30,9 @@ public:
     Point& getPos1();
     Point& getPos2();
     bool isOpen() const;
+
+    static int buttonsNumByType(BaseObject::ObjectType type);
+    void initButtonsByType(BaseObject::ObjectType type);
 
     void setOpen(bool o);
 

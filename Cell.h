@@ -2,10 +2,9 @@
 #define LIGHTSED_CELL_H
 
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "BaseObject.h"
-#include "Locked.h"
-#include "SFML/Graphics/Font.hpp"
+#include <SFML/Graphics/Font.hpp>
 #include <memory>
+#include "Locked.h"
 
 class Player;
 

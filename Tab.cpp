@@ -7,6 +7,28 @@ Point& Tab::getPos1() { return m_pos1; }
 Point& Tab::getPos2() { return m_pos2; }
 bool Tab::isOpen() const { return m_open; }
 
+int Tab::buttonsNumByType(BaseObject::ObjectType type) {
+    switch (type) {
+        case BaseObject::BUILDING1:             return 1;
+        case BaseObject::CHANCE_BUILDING:       return 1;
+        case BaseObject::AUTOMATION_BUILDING:   return 1;
+        default: return 0;
+    }
+}
+
+void Tab::initButtonsByType(BaseObject::ObjectType type) {
+    m_buttons = new Button*[m_totalButtons];
+    if(type == BaseObject::BUILDING1) {
+        m_buttons[0] = new UpgradeButton(m_pos1.getX()+40, m_pos1.getY()+40, 200+m_pos1.getX(), 200+m_pos1.getY(), "Doubler", 10, 3, UpgradeFunc1);
+    }
+    else if(type == BaseObject::CHANCE_BUILDING) {
+
+    }
+    else if(type == BaseObject::AUTOMATION_BUILDING) {
+
+    }
+}
+
 void Tab::setOpen(bool o) { m_open = o; }
 
 void Tab::draw(sf::RenderWindow &window, sf::Font &font) {
@@ -28,13 +50,13 @@ void Tab::draw(sf::RenderWindow &window, sf::Font &font) {
 
     window.draw(rect);
     window.draw(text);
-    for(int i=0; i<1; i++) {
+    for(int i=0; i<m_totalButtons; i++) {
         m_buttons[i]->draw(window, font);
     }
 }
 
 void Tab::checkHover(int x, int y) {
-    for(int i=0; i<1; i++) {
+    for(int i=0; i<m_totalButtons; i++) {
         m_buttons[i]->setHovered(m_buttons[i]->isCollide(x, y));
     }
 }

@@ -1,5 +1,5 @@
-#include "BaseObject.h"
 #include <SFML/Graphics/Color.hpp>
+#include "BaseObject.h"
 #include "constants.h"
 
 BaseObject::ObjectType BaseObject::getType() const { return m_type; }

@@ -1,8 +1,6 @@
 #ifndef LIGHTSED_CONSTANTS_H
 #define LIGHTSED_CONSTANTS_H
 
-#include "SFML/Graphics/Font.hpp"
-
 namespace Constants {
     const char playerChar = 'p';
     const int characterSize = 28;

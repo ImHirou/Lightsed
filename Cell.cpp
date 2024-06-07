@@ -1,10 +1,9 @@
+#include <SFML/Graphics.hpp>
+#include <cmath>
 #include "Cell.h"
 #include "Player.h"
-#include "SFML/Graphics.hpp"
-#include "constants.h"
-#include <cmath>
-#include "BaseObject.h"
 #include "Light.h"
+#include "constants.h"
 
 Cell::Cell() {
     m_layer1 = std::make_unique<BaseObject>();

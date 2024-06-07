@@ -1,7 +1,7 @@
-#include "Player.h"
-#include "constants.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Player.h"
+#include "constants.h"
 
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }

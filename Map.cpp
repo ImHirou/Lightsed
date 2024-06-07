@@ -1,11 +1,9 @@
-#include "Map.h"
-#include "Cell.h"
-#include "BaseObject.h"
-#include "Light.h"
-#include "constants.h"
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
+#include "Map.h"
+#include "Light.h"
+#include "constants.h"
 
 Map::Map() : m_player(Player(17, 25, 1000000)), m_tps(20) {
     for(int i=0; i<50; i++) {

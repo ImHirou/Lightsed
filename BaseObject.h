@@ -18,6 +18,9 @@ public:
         NINE,
         PLAYER,
         LIGHT,
+        BUILDING1,
+        CHANCE_BUILDING,
+        AUTOMATION_BUILDING,
         TOTAL_TYPES
 
     };

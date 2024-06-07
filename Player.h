@@ -1,9 +1,9 @@
 #ifndef LIGHTSED_PLAYER_H
 #define LIGHTSED_PLAYER_H
 
-#include "Cell.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include "Cell.h"
 
 class Player : public BaseObject{
 public:

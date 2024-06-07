@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "ctime"
-#include "cstdlib"
+#include <ctime>
+#include <cstdlib>
 #include "Map.h"
-#include "constants.h"
 #include "Tab.h"
+#include "constants.h"
 
 using namespace sf;
 static Font font;
@@ -19,7 +19,6 @@ int main() {
     font.loadFromFile("F:\\MyCodes\\Lightsed\\fonts\\VCR_OSD_MONO_1.001.ttf");
     Map map;
     Clock clock;
-    Tab tab(Point(100, 100), Point(600, 400), "negr");
 
     while(window.isOpen()) {
 
@@ -29,10 +28,6 @@ int main() {
                 window.close();
             if(event.type == Event::MouseButtonPressed) {
                 if(event.mouseButton.button == Mouse::Left) {
-                    UpgradeButton* button = dynamic_cast<UpgradeButton*>(tab.getButtons()[0]);
-                    if(button->isHovered() && tab.isOpen()) {
-                        button->buy(map.getPlayer());
-                    }
                 }
             }
             if(event.type == Event::KeyPressed) {
@@ -51,9 +46,6 @@ int main() {
                 if(event.key.code == Keyboard::D) {
                     map.getPlayer().setKey(Player::Key_D, true);
                     map.movePlayer();
-                }
-                if(event.key.code == Keyboard::Q) {
-                    tab.setOpen(!tab.isOpen());
                 }
             }
             if(event.type == Event::KeyReleased) {
@@ -75,12 +67,10 @@ int main() {
 
         if(1.0/map.getTPS() <= clock.getElapsedTime().asSeconds()) {
             map.tick();
-            tab.checkHover(event.mouseMove.x, event.mouseMove.y);
             clock.restart();
         }
         window.clear(Color::Black);
         map.draw(window, font);
-        if(tab.isOpen()) tab.draw(window, font);
         window.display();
 
     }

@@ -1,10 +1,10 @@
 #ifndef LIGHTSED_MAP_H
 #define LIGHTSED_MAP_H
 
-#include "Cell.h"
-#include "Player.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include "Cell.h"
+#include "Player.h"
 
 class Map {
 private:
