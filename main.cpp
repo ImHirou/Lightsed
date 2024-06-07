@@ -5,6 +5,7 @@
 #include "Map.h"
 #include "constants.h"
 #include "Button.h"
+#include "Tab.h"
 
 using namespace sf;
 static Font font;
@@ -19,7 +20,7 @@ int main() {
     font.loadFromFile("F:\\MyCodes\\Lightsed\\fonts\\VCR_OSD_MONO_1.001.ttf");
     Map map;
     Clock clock;
-    Button button(100, 100, 400, 200);
+    Tab tab(Point(100, 100), Point(600, 400), "negr");
 
     while(window.isOpen()) {
 
@@ -27,7 +28,6 @@ int main() {
         while(window.pollEvent(event)) {
             if(event.type == Event::Closed)
                 window.close();
-            if(event.type == Event::MouseMoved) button.setHovered(button.isCollide(event.mouseMove.x, event.mouseMove.y));
             if(event.type == Event::KeyPressed) {
                 if(event.key.code == Keyboard::W) {
                     map.getPlayer().setKey(Player::Key_W, true);
@@ -69,7 +69,7 @@ int main() {
         }
         window.clear(Color::Black);
         map.draw(window, font);
-        button.draw(window);
+        tab.draw(window, font);
         window.display();
 
     }
