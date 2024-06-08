@@ -24,6 +24,7 @@ public:
     bool isLocked() const;
     bool isLight() const;
     bool isBuilding() const;
+    bool isMoreThan(BaseObject::ObjectType type) const;
     void unlockCell(Player &player);
     void drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void changeLightLevel(int lightLevel);

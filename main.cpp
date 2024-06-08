@@ -26,6 +26,10 @@ int main() {
         while(window.pollEvent(event)) {
             if(event.type == Event::Closed)
                 window.close();
+            /*if (event.type == sf::Event::Resized) {
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                window.setView(sf::View(visibleArea));
+            }*/
             if(event.type == Event::MouseMoved) {
                 Building** buildings = map.getBuildings();
                 for(int i=0; i<3; i++) {

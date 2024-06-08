@@ -3,7 +3,10 @@
 
 #include "UpgradeButton.h"
 
-void UpgradeFunc1(UpgradeButton& but, Player& player);
+void Upgrade1Build1Func(UpgradeButton& but, Player& player);
+void Upgrade2Build1Func(UpgradeButton& but, Player& player);
+void Upgrade3Build1Func(UpgradeButton& but, Player& player);
+void Upgrade4Build1Func(UpgradeButton& but, Player& player);
 
 void UpgradeChanceFunc(UpgradeButton& but, Player& player);
 

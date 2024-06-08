@@ -12,7 +12,7 @@ bool Tab::isOpen() const { return m_open; }
 int Tab::buttonsNumByType(BaseObject::ObjectType type) {
     std::cout << type << "TYPE\n";
     switch (type) {
-        case BaseObject::BUILDING1:             return 1;
+        case BaseObject::BUILDING1:             return 2;
         case BaseObject::CHANCE_BUILDING:       return 1;
         case BaseObject::AUTOMATION_BUILDING:   return 1;
         default: return 0;
@@ -22,7 +22,8 @@ int Tab::buttonsNumByType(BaseObject::ObjectType type) {
 void Tab::initButtonsByType(BaseObject::ObjectType type) {
     m_buttons = new Button*[m_totalButtons];
     if(type == BaseObject::BUILDING1) {
-        m_buttons[0] = new UpgradeButton((m_pos1.getX()+20), (m_pos1.getY()+100), (200+m_pos1.getX()), (200+m_pos1.getY()), "Doubler", 10, 10, UpgradeFunc1);
+        m_buttons[0] = new UpgradeButton((m_pos1.getX()+10), (m_pos1.getY()+100), (190+m_pos1.getX()), (200+m_pos1.getY()), "Doubler", 10, 10, Upgrade1Build1Func);
+        m_buttons[1] = new UpgradeButton((m_pos1.getX()+210), (m_pos1.getY()+100), (390+m_pos1.getX()), (200+m_pos1.getY()), "Triple 3+", 200, 1, Upgrade2Build1Func);
     }
     else if(type == BaseObject::CHANCE_BUILDING) {
         m_buttons[0] = new UpgradeButton(m_pos1.getX()+20, m_pos1.getY()+100, 380+m_pos1.getX(), 300+m_pos1.getY(), "Double Light Chance", 1000, 10, UpgradeChanceFunc);

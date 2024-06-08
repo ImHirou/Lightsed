@@ -22,13 +22,15 @@ private:
     int m_lightChance;
     int m_x;
     int m_y;
+    bool m_tripleBoost;
     bool m_keyPressed[TOTAL_KEYS] {};
 public:
     Player(int x=0, int y=0, long long light=0) :
-            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light), m_multi(1), m_lightChance(1), m_automator() {
+            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light), m_multi(1), m_lightChance(1), m_automator(), m_tripleBoost(false) {
         for(int i = 0; i < static_cast<int>(TOTAL_KEYS); ++i) m_keyPressed[static_cast<Key>(i)] = false;
     }
 
+    bool isTripleBoost();
     int getX() const;
     int getY() const;
     int getLightChance() const;
@@ -39,6 +41,7 @@ public:
     void reduceLight(long long n);
     void addLight(long long n);
     void addMulti(long long n);
+    void setTripleBoost(bool tb);
 
     void setKey(Key key, bool p);
     void setMulti(long long mult);

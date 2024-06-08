@@ -47,6 +47,11 @@ bool Cell::isBuilding() const {
             m_layer1->getType() == BaseObject::AUTOMATION_BUILDING;
 }
 
+bool Cell::isMoreThan(BaseObject::ObjectType type) const {
+    std::cout << type << " " << m_layer2->getType() << "ISMORETHAN\n";
+    return type < m_layer2->getType();
+}
+
 void Cell::unlockCell(Player &player) {
     if(!isLocked()) return;
     Locked* lock = dynamic_cast<Locked*>(m_layer2.get());
