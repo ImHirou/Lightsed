@@ -6,7 +6,7 @@
 #include "Building.h"
 #include "constants.h"
 
-Map::Map() : m_player(Player(25, 17, 1000000)), m_tps(20) {
+Map::Map() : m_player(Player(25, 17, 10000000000)), m_tps(20) {
     int nw=0;
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
@@ -88,7 +88,7 @@ void Map::tick() {
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
             m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
-            if(!m_cells[i][j].isLocked() && m_cells[i][j].isBuilding())
+            if(!m_cells[i][j].isLocked() && !m_cells[i][j].isBuilding())
                 if(rand() % 10000 <= m_player.getLightChance()) m_cells[i][j].makeLight();
         }
     }
