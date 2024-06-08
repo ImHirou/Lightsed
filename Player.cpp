@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Player.h"
+#include "Building.h"
 #include "constants.h"
 
 int Player::getX() const { return m_x; }
@@ -34,12 +35,18 @@ void Player::moveBy(int x, int y, Cell &cell) {
         }
     }
     else {
-        if(cell.isLight()) {
-            m_light+=m_multi;
-            cell.makeEmpty();
+        if(cell.isBuilding()) {
+            Building* building = dynamic_cast<Building*>(cell.getLayer1());
+            building->getTab().setOpen(!building->getTab().isOpen());
         }
-        m_x += x;
-        m_y += y;
+        else {
+            if(cell.isLight()) {
+                m_light += m_multi;
+                cell.makeEmpty();
+            }
+            m_x += x;
+            m_y += y;
+        }
     }
     std::cout << m_light << "\n";
 }

@@ -2,6 +2,7 @@
 #define LIGHTSED_BASEOBJECT_H
 
 #include <SFML/Graphics/Color.hpp>
+#include <memory>
 
 class BaseObject {
 public:

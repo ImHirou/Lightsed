@@ -22,6 +22,9 @@ char BaseObject::charByType(const ObjectType &type) {
         case NINE: return '9';
         case PLAYER: return Constants::playerChar;
         case LIGHT: return 'l';
+        case BUILDING1: return 'u';
+        case CHANCE_BUILDING: return 'c';
+        case AUTOMATION_BUILDING: return 'a';
         default: return ' ';
     }
 }
@@ -40,6 +43,9 @@ sf::Color BaseObject::colorByType(const ObjectType &type) {
         case NINE: return {70, 30, 110};
         case PLAYER: return {200, 200, 200};
         case LIGHT: return {170, 170, 230};
+        case BUILDING1: return {180, 180, 180};
+        case CHANCE_BUILDING: return {170, 170, 30};
+        case AUTOMATION_BUILDING: return {80, 80, 80};
         default: return sf::Color(0);
     }
 }
@@ -57,7 +63,10 @@ BaseObject::ObjectType BaseObject::typeByChar(char ch) {
         case '8': return EIGHT;
         case '9': return NINE;
         case Constants::playerChar: return PLAYER;
-        case 127: return LIGHT;
+        case 'l': return LIGHT;
+        case 'u': return BUILDING1;
+        case 'c': return CHANCE_BUILDING;
+        case 'a': return AUTOMATION_BUILDING;
         default: return EMPTY;
     }
 }

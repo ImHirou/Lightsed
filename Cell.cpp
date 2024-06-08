@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <iostream>
 #include "Cell.h"
 #include "Player.h"
 #include "Light.h"
@@ -9,6 +10,9 @@ Cell::Cell() {
     m_layer1 = std::make_unique<BaseObject>();
     m_layer2 = std::make_unique<BaseObject>();
 }
+
+BaseObject* Cell::getLayer1() { return m_layer1.get(); }
+BaseObject* Cell::getLayer2() { return m_layer2.get(); }
 
 bool Cell::canUnlockCell(const Player &player){
     Locked* lock = dynamic_cast<Locked*>(m_layer2.get());
@@ -37,6 +41,12 @@ bool Cell::isLight() const {
     return m_layer2->getType() == BaseObject::LIGHT;
 }
 
+bool Cell::isBuilding() const {
+    return m_layer1->getType() == BaseObject::BUILDING1 ||
+            m_layer1->getType() == BaseObject::CHANCE_BUILDING ||
+            m_layer1->getType() == BaseObject::AUTOMATION_BUILDING;
+}
+
 void Cell::unlockCell(Player &player) {
     if(!isLocked()) return;
     Locked* lock = dynamic_cast<Locked*>(m_layer2.get());
@@ -57,7 +67,7 @@ void Cell::drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font) {
         text.setString(m_layer1->getChar());
         text.setCharacterSize(Constants::characterSize);
         text.setPosition(x * Constants::characterSize, y * Constants::characterSize);
-        text.setColor(m_layer1->getColor());
+        text.setColor(BaseObject::colorByType(m_layer1->getType()));
     }
     window.draw(text);
 }

@@ -3,14 +3,26 @@
 #include <iostream>
 #include "Map.h"
 #include "Light.h"
+#include "Building.h"
 #include "constants.h"
 
-Map::Map() : m_player(Player(17, 25, 1000000)), m_tps(20) {
+Map::Map() : m_player(Player(25, 17, 1000000)), m_tps(20) {
+    int nw=0;
     for(int i=0; i<50; i++) {
         for(int j=0; j<50; j++) {
-            auto layer1 = std::make_unique<BaseObject>(BaseObject::typeByChar(Constants::mapLayer1[i][j]));
             auto layer2 = std::make_unique<Locked>(BaseObject::typeByChar(Constants::mapLayer2[i][j]));
-            m_cells[i][j] = Cell(std::move(layer1), std::move(layer2));
+            if(BaseObject::typeByChar(Constants::mapLayer1[i][j]) == BaseObject::BUILDING1 ||
+                BaseObject::typeByChar(Constants::mapLayer1[i][j]) == BaseObject::CHANCE_BUILDING ||
+                BaseObject::typeByChar(Constants::mapLayer1[i][j]) == BaseObject::AUTOMATION_BUILDING) {
+                auto layer1 = std::make_unique<Building>(BaseObject::typeByChar(Constants::mapLayer1[i][j]));
+                m_buildings[nw] = layer1.get();
+                nw++;
+                m_cells[j][i] = Cell(std::move(layer1), std::move(layer2));
+            }
+            else {
+                auto layer1 = std::make_unique<BaseObject>(BaseObject::typeByChar(Constants::mapLayer1[i][j]));
+                m_cells[j][i] = Cell(std::move(layer1), std::move(layer2));
+            }
         }
     }
 }
@@ -20,6 +32,7 @@ double distance(double x1, double y1, double x2, double y2) {
 }
 
 Player& Map::getPlayer() { return m_player; }
+Building** Map::getBuildings() { return m_buildings; }
 int Map::getTPS() const { return m_tps; }
 
 void Map::drawEmptyCell(sf::RenderWindow &window, int x, int y, sf::Font &font) {
@@ -47,9 +60,15 @@ void Map::draw(sf::RenderWindow &window, sf::Font &font) {
             }
         }
     }
+    for(int i=0; i<3; i++) {
+        if(!m_buildings[i]->getTab().isOpen()) continue;
+        m_buildings[i]->getTab().draw(window, font);
+    }
 }
 
 void Map::movePlayer() {
+    for(int i=0; i<3; i++)
+        if(m_buildings[i]->getTab().isOpen()) m_buildings[i]->getTab().setOpen(false);
     if(m_player.isKeyPressed(Player::Key_W)) {
         if(m_player.getY()-1 >= 0 && m_player.getY()-1 < 50) m_player.moveBy(0, -1, m_cells[m_player.getX()][m_player.getY()-1]);
     }

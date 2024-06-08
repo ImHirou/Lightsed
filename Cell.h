@@ -18,9 +18,12 @@ public:
             m_layer1(std::move(layer1)), m_layer2(std::move(layer2)) {
     }
 
+    BaseObject* getLayer1();
+    BaseObject* getLayer2();
     bool canUnlockCell(const Player &player);
     bool isLocked() const;
     bool isLight() const;
+    bool isBuilding() const;
     void unlockCell(Player &player);
     void drawCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void changeLightLevel(int lightLevel);

@@ -26,8 +26,26 @@ int main() {
         while(window.pollEvent(event)) {
             if(event.type == Event::Closed)
                 window.close();
+            if(event.type == Event::MouseMoved) {
+                Building** buildings = map.getBuildings();
+                for(int i=0; i<3; i++) {
+                    if(!buildings[i]->getTab().isOpen()) continue;
+                    buildings[i]->getTab().checkHover(event.mouseMove.x, event.mouseMove.y);
+                }
+            }
             if(event.type == Event::MouseButtonPressed) {
                 if(event.mouseButton.button == Mouse::Left) {
+                    Building** buildings = map.getBuildings();
+                    for(int i=0; i<3; i++) {
+                        if(!buildings[i]->getTab().isOpen()) continue;
+                        Button** buttons = buildings[i]->getTab().getButtons();
+                        for(int j=0; j<buildings[i]->getTab().getButtonsNum(); j++) {
+                            if(buttons[j]->isHovered()) {
+                                UpgradeButton* button = dynamic_cast<UpgradeButton*>(buttons[i]);
+                                button->buy(map.getPlayer());
+                            }
+                        }
+                    }
                 }
             }
             if(event.type == Event::KeyPressed) {

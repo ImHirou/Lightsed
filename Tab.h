@@ -27,6 +27,7 @@ public:
     }
 
     Button** getButtons();
+    int getButtonsNum() const;
     Point& getPos1();
     Point& getPos2();
     bool isOpen() const;

@@ -1,13 +1,16 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Tab.h"
 #include "constants.h"
 
 Button** Tab::getButtons() { return m_buttons; }
+int Tab::getButtonsNum() const { return m_totalButtons; }
 Point& Tab::getPos1() { return m_pos1; }
 Point& Tab::getPos2() { return m_pos2; }
 bool Tab::isOpen() const { return m_open; }
 
 int Tab::buttonsNumByType(BaseObject::ObjectType type) {
+    std::cout << type << "TYPE\n";
     switch (type) {
         case BaseObject::BUILDING1:             return 1;
         case BaseObject::CHANCE_BUILDING:       return 1;
