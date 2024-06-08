@@ -4,6 +4,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include "Cell.h"
+#include "Automator.h"
 
 class Player : public BaseObject{
 public:
@@ -15,6 +16,7 @@ public:
         TOTAL_KEYS
     };
 private:
+    Automator m_automator;
     long long m_light;
     long long m_multi;
     int m_lightChance;
@@ -23,7 +25,7 @@ private:
     bool m_keyPressed[TOTAL_KEYS] {};
 public:
     Player(int x=0, int y=0, long long light=0) :
-            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light), m_multi(1), m_lightChance(1) {
+            BaseObject(PLAYER), m_x(x), m_y(y), m_light(light), m_multi(1), m_lightChance(1), m_automator() {
         for(int i = 0; i < static_cast<int>(TOTAL_KEYS); ++i) m_keyPressed[static_cast<Key>(i)] = false;
     }
 
@@ -32,6 +34,7 @@ public:
     int getLightChance() const;
     long long getLight() const;
     long long getMulti() const;
+    Automator& getAutomator();
 
     void reduceLight(long long n);
     void addLight(long long n);

@@ -9,6 +9,7 @@ int Player::getY() const { return m_y; }
 int Player::getLightChance() const { return m_lightChance; }
 long long Player::getLight() const { return m_light; }
 long long Player::getMulti() const { return m_multi; }
+Automator& Player::getAutomator() { return m_automator; }
 
 void Player::reduceLight(long long n) { m_light-=n; }
 void Player::addLight(long long n) { m_light+=n; }

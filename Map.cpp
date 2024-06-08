@@ -83,13 +83,30 @@ void Map::movePlayer() {
     }
 }
 
+void Map::collectLight() {
+    for(int i=0; i<50; ++i) {
+        for(int j=0; j<50; ++j) {
+            if(m_cells[i][j].isLight()) {
+                m_player.addLight(m_player.getMulti());
+                m_cells[i][j].makeEmpty();
+            }
+        }
+    }
+}
+
 void Map::tick() {
+    m_player.getAutomator().reduceCollectTicks();
     int lightLevel = log2(m_player.getLight());
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
             m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
-            if(!m_cells[i][j].isLocked() && !m_cells[i][j].isBuilding())
+            if(m_player.getAutomator().isMaxed()) {
+                if (rand() % 10000 <= m_player.getLightChance())
+                    m_player.addLight(m_player.getMulti());
+            }
+            else if(!m_cells[i][j].isLocked() && !m_cells[i][j].isBuilding())
                 if(rand() % 10000 <= m_player.getLightChance()) m_cells[i][j].makeLight();
         }
     }
+    if(m_player.getAutomator().needCollect() && !m_player.getAutomator().isMaxed()) collectLight();
 }

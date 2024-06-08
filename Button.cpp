@@ -53,7 +53,7 @@ void Button::draw(sf::RenderWindow &window, sf::Font& font) {
     float xs = (m_pos2.getX()-m_pos1.getX());
     float ys = (m_pos2.getY()-m_pos1.getY());
 
-    sf::RectangleShape rect(sf::Vector2f(xs, ys), sf::Vector2f());
+    sf::RectangleShape rect(sf::Vector2f(xs, ys), sf::Vector2f(0, 0));
     sf::Text text;
     text.setFont(font);
     text.setString(m_title);

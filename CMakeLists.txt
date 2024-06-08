@@ -35,6 +35,8 @@ add_executable(Lightsed main.cpp
         Building.cpp
         Building.h
         BuildingTabs.h
+        Automator.cpp
+        Automator.h
 )
 
 target_link_libraries(Lightsed sfml-system)

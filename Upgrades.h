@@ -7,4 +7,6 @@ void UpgradeFunc1(UpgradeButton& but, Player& player);
 
 void UpgradeChanceFunc(UpgradeButton& but, Player& player);
 
+void UpgradeAutomatorFunc(UpgradeButton& but, Player& player);
+
 #endif //LIGHTSED_UPGRADES_H

@@ -24,6 +24,7 @@ public:
     void drawEmptyCell(sf::RenderWindow &window, int x, int y, sf::Font &font);
     void movePlayer();
     void tick();
+    void collectLight();
 
 };
 
