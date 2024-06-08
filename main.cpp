@@ -41,7 +41,7 @@ int main() {
                         Button** buttons = buildings[i]->getTab().getButtons();
                         for(int j=0; j<buildings[i]->getTab().getButtonsNum(); j++) {
                             if(buttons[j]->isHovered()) {
-                                UpgradeButton* button = dynamic_cast<UpgradeButton*>(buttons[i]);
+                                UpgradeButton* button = dynamic_cast<UpgradeButton*>(buttons[j]);
                                 button->buy(map.getPlayer());
                             }
                         }

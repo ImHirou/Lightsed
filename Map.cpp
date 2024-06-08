@@ -88,8 +88,8 @@ void Map::tick() {
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
             m_cells[i][j].changeLightLevel(lightLevel - distance(i, j, m_player.getX(), m_player.getY()) + 5);
-            if(!m_cells[i][j].isLocked())
-                if(rand() % 10000 <= 1) m_cells[i][j].makeLight();
+            if(!m_cells[i][j].isLocked() && m_cells[i][j].isBuilding())
+                if(rand() % 10000 <= m_player.getLightChance()) m_cells[i][j].makeLight();
         }
     }
 }

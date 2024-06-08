@@ -22,10 +22,10 @@ int Tab::buttonsNumByType(BaseObject::ObjectType type) {
 void Tab::initButtonsByType(BaseObject::ObjectType type) {
     m_buttons = new Button*[m_totalButtons];
     if(type == BaseObject::BUILDING1) {
-        m_buttons[0] = new UpgradeButton(m_pos1.getX()+40, m_pos1.getY()+40, 200+m_pos1.getX(), 200+m_pos1.getY(), "Doubler", 10, 3, UpgradeFunc1);
+        m_buttons[0] = new UpgradeButton((m_pos1.getX()+20), (m_pos1.getY()+100), (200+m_pos1.getX()), (200+m_pos1.getY()), "Doubler", 10, 3, UpgradeFunc1);
     }
     else if(type == BaseObject::CHANCE_BUILDING) {
-
+        m_buttons[0] = new UpgradeButton(m_pos1.getX()+20, m_pos1.getY()+100, 380+m_pos1.getX(), 300+m_pos1.getY(), "Double Light Chance", 1000, 10, UpgradeChanceFunc);
     }
     else if(type == BaseObject::AUTOMATION_BUILDING) {
 

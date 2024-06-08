@@ -6,6 +6,7 @@
 
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
+int Player::getLightChance() const { return m_lightChance; }
 long long Player::getLight() const { return m_light; }
 long long Player::getMulti() const { return m_multi; }
 
@@ -17,6 +18,7 @@ bool Player::isKeyPressed(Player::Key key) const { return m_keyPressed[key]; }
 
 void Player::setKey(Player::Key key, bool p) { m_keyPressed[key] = p;}
 void Player::setMulti(long long mult) { m_multi = mult; }
+void Player::setLightChance(int c) { m_lightChance = c;}
 
 void Player::draw(sf::RenderWindow &window, int x, int y, sf::Font &font) {
     sf::Text text;

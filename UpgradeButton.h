@@ -27,6 +27,7 @@ public:
 
     void buy(Player &player);
 
+    void draw(sf::RenderWindow &window, sf::Font &font);
 };
 
 #endif //LIGHTSED_UPGRADEBUTTON_H
