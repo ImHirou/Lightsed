@@ -194,3 +194,12 @@
 6	938	7395667547558376	CMakeFiles/Lightsed.dir/Cell.cpp.obj	8f337ae443e43f5
 9	1000	7395667548176306	CMakeFiles/Lightsed.dir/Map.cpp.obj	ba15e2a57c32dde7
 1000	1878	7395667556915693	Lightsed.exe	4e94359d07bcb27e
+7	862	7395755896760872	CMakeFiles/Lightsed.dir/Upgrades.cpp.obj	b19a163dfb6914a9
+11	932	7395755897450682	CMakeFiles/Lightsed.dir/main.cpp.obj	b367c4ce1436b365
+10	939	7395755897521608	CMakeFiles/Lightsed.dir/Building.cpp.obj	875af7806792f90
+4	943	7395755897567207	CMakeFiles/Lightsed.dir/Player.cpp.obj	7d82c44c13231059
+9	967	7395755897800624	CMakeFiles/Lightsed.dir/UpgradeButton.cpp.obj	d69511f9440a79e2
+8	972	7395755897861421	CMakeFiles/Lightsed.dir/Tab.cpp.obj	a07b13e5e4e240ba
+6	1086	7395755898985824	CMakeFiles/Lightsed.dir/Cell.cpp.obj	8f337ae443e43f5
+6	1113	7395755899262980	CMakeFiles/Lightsed.dir/Map.cpp.obj	ba15e2a57c32dde7
+1113	2048	7395755908579068	Lightsed.exe	4e94359d07bcb27e

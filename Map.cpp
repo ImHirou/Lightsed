@@ -86,11 +86,7 @@ void Map::movePlayer() {
 void Map::collectLight() {
     for(int i=0; i<50; ++i) {
         for(int j=0; j<50; ++j) {
-            if(m_cells[i][j].isLight()) {
-                if(BaseObject::typeByChar(Constants::mapLayer2[i][j]) > BaseObject::TWO && m_player.isTripleBoost()) m_player.addLight(m_player.getMulti()*2);
-                m_player.addLight(m_player.getMulti());
-                m_cells[i][j].makeEmpty();
-            }
+            m_player.collectLight(i, j, m_cells[i][j]);
         }
     }
 }

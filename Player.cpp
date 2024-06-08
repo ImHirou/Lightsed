@@ -4,7 +4,7 @@
 #include "Building.h"
 #include "constants.h"
 
-bool Player::isTripleBoost() { return m_tripleBoost; }
+bool Player::isNXBoost() { return m_NXBoost; }
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 int Player::getLightChance() const { return m_lightChance; }
@@ -12,10 +12,18 @@ long long Player::getLight() const { return m_light; }
 long long Player::getMulti() const { return m_multi; }
 Automator& Player::getAutomator() { return m_automator; }
 
-void Player::setTripleBoost(bool tb) { m_tripleBoost = tb; }
+void Player::setNXBoost(bool tb) { m_NXBoost = tb; }
 void Player::reduceLight(long long n) { m_light-=n; }
 void Player::addLight(long long n) { m_light+=n; }
 void Player::addMulti(long long n) { m_multi+=n; }
+
+void Player::collectLight(int x, int y, Cell &cell) {
+    if(cell.isLight()) {
+        if(isNXBoost()) m_light += m_multi*BaseObject::typeByChar(Constants::mapLayer2[x][y]);
+        else m_light += m_multi;
+        cell.makeEmpty();
+    }
+}
 
 bool Player::isKeyPressed(Player::Key key) const { return m_keyPressed[key]; }
 
@@ -45,11 +53,7 @@ void Player::moveBy(int x, int y, Cell &cell) {
             building->getTab().setOpen(!building->getTab().isOpen());
         }
         else {
-            if(cell.isLight()) {
-                if(BaseObject::typeByChar(Constants::mapLayer2[m_y+y][m_x+x]) > BaseObject::TWO && isTripleBoost()) m_light += m_multi*2;
-                m_light += m_multi;
-                cell.makeEmpty();
-            }
+            collectLight(m_y+y, m_x+x, cell);
             m_x += x;
             m_y += y;
         }
