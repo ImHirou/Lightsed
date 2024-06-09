@@ -4,12 +4,15 @@
 #include "Building.h"
 #include "constants.h"
 
-bool Player::isNXBoost() { return m_NXBoost; }
+bool Player::isNXBoost() const{ return m_NXBoost; }
+bool Player::isCTRLUnlocked() const { return m_ctrlUnlocked; }
+bool Player::isShiftUnlocked() const { return m_shiftUnlocked; }
 int Player::getX() const { return m_x; }
 int Player::getY() const { return m_y; }
 int Player::getLightChance() const { return m_lightChance; }
 long long Player::getLight() const { return m_light; }
 long long Player::getMulti() const { return m_multi; }
+Player::Key Player::getLastKeyPressed() const { return m_lastKeyPressed; }
 Automator& Player::getAutomator() { return m_automator; }
 
 void Player::setNXBoost(bool tb) { m_NXBoost = tb; }
@@ -25,9 +28,13 @@ void Player::collectLight(int x, int y, Cell &cell) {
     }
 }
 
+void Player::unlockCTRL() { m_ctrlUnlocked = true; }
+void Player::unlockShift() { m_shiftUnlocked = true; }
+
 bool Player::isKeyPressed(Player::Key key) const { return m_keyPressed[key]; }
 
 void Player::setKey(Player::Key key, bool p) { m_keyPressed[key] = p;}
+void Player::setLastKeyPressed(Player::Key key) { m_lastKeyPressed = key; }
 void Player::setMulti(long long mult) { m_multi = mult; }
 void Player::setLightChance(int c) { m_lightChance = c;}
 

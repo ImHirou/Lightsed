@@ -42,3 +42,8 @@ add_executable(Lightsed main.cpp
 target_link_libraries(Lightsed sfml-system)
 target_link_libraries(Lightsed sfml-graphics)
 target_link_libraries(Lightsed sfml-window)
+
+add_custom_command(TARGET Lightsed POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/fonts $<TARGET_FILE_DIR:Lightsed>/fonts
+)

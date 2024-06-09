@@ -173,7 +173,7 @@ build Lightsed.exe: CXX_EXECUTABLE_LINKER__Lightsed_Debug CMakeFiles/Lightsed.di
   FLAGS = -g
   LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-system-s-d.a  _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lwinmm  -lopengl32  -lgdi32  _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Lightsed.dir
-  POST_BUILD = cd .
+  POST_BUILD = cmd.exe /C "cd /D F:\MyCodes\Lightsed\cmake-build-debug && "F:\CLion 2023.2.3\bin\cmake\win\x64\bin\cmake.exe" -E copy_directory F:/MyCodes/Lightsed/fonts F:/MyCodes/Lightsed/cmake-build-debug/fonts"
   PRE_LINK = cd .
   TARGET_FILE = Lightsed.exe
   TARGET_IMPLIB = libLightsed.dll.a

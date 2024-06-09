@@ -69,17 +69,41 @@ void Map::draw(sf::RenderWindow &window, sf::Font &font) {
 void Map::movePlayer() {
     for(int i=0; i<3; i++)
         if(m_buildings[i]->getTab().isOpen()) m_buildings[i]->getTab().setOpen(false);
-    if(m_player.isKeyPressed(Player::Key_W)) {
-        if(m_player.getY()-1 >= 0 && m_player.getY()-1 < 50) m_player.moveBy(0, -1, m_cells[m_player.getX()][m_player.getY()-1]);
+    if(m_player.isShiftUnlocked() && m_player.isKeyPressed(Player::Key_SHIFT)) {
+        if (m_player.getLastKeyPressed() == Player::Key_W) {
+            if (m_player.getY() - 1 >= 0 && m_player.getY() - 1 < 50) m_player.moveBy(0, -1, m_cells[m_player.getX()][m_player.getY() - 1]);
+        }
+        if (m_player.getLastKeyPressed() == Player::Key_A) {
+            if (m_player.getX() - 1 >= 0 && m_player.getX() - 1 < 50) m_player.moveBy(-1, 0, m_cells[m_player.getX() - 1][m_player.getY()]);
+        }
+        if (m_player.getLastKeyPressed() == Player::Key_S) {
+            if (m_player.getY() + 1 >= 0 && m_player.getY() + 1 < 50) m_player.moveBy(0, 1, m_cells[m_player.getX()][m_player.getY() + 1]);
+        }
+        if (m_player.getLastKeyPressed() == Player::Key_D) {
+            if (m_player.getX() + 1 >= 0 && m_player.getX() + 1 < 50) m_player.moveBy(1, 0, m_cells[m_player.getX() +1][m_player.getY()]);
+        }
     }
-    if(m_player.isKeyPressed(Player::Key_A)) {
-        if(m_player.getX()-1 >= 0 && m_player.getX()-1 < 50) m_player.moveBy(-1, 0, m_cells[m_player.getX()-1][m_player.getY()]);
-    }
-    if(m_player.isKeyPressed(Player::Key_S)) {
-        if(m_player.getY()+1 >= 0 && m_player.getY()+1 < 50) m_player.moveBy(0, 1, m_cells[m_player.getX()][m_player.getY()+1]);
-    }
-    if(m_player.isKeyPressed(Player::Key_D)) {
-        if(m_player.getX()+1 >= 0 && m_player.getX()+1 < 50) m_player.moveBy(1, 0, m_cells[m_player.getX()+1][m_player.getY()]);
+    else {
+        if (m_player.isKeyPressed(Player::Key_W)) {
+            if (m_player.getY() - 1 >= 0 && m_player.getY() - 1 < 50) m_player.moveBy(0, -1, m_cells[m_player.getX()][m_player.getY() - 1]);
+            if (m_player.isKeyPressed(Player::Key_CTRL) && m_player.isCTRLUnlocked())
+                if (m_player.getY() - 1 >= 0 && m_player.getY() - 1 < 50) m_player.moveBy(0, -1,m_cells[m_player.getX()][m_player.getY() - 1]);
+        }
+        if (m_player.isKeyPressed(Player::Key_A)) {
+            if (m_player.getX() - 1 >= 0 && m_player.getX() - 1 < 50) m_player.moveBy(-1, 0, m_cells[m_player.getX() - 1][m_player.getY()]);
+            if (m_player.isKeyPressed(Player::Key_CTRL) && m_player.isCTRLUnlocked())
+                if (m_player.getX() - 1 >= 0 && m_player.getX() - 1 < 50) m_player.moveBy(-1, 0,m_cells[m_player.getX() - 1][m_player.getY()]);
+        }
+        if (m_player.isKeyPressed(Player::Key_S)) {
+            if (m_player.getY() + 1 >= 0 && m_player.getY() + 1 < 50) m_player.moveBy(0, 1, m_cells[m_player.getX()][m_player.getY() + 1]);
+            if (m_player.isKeyPressed(Player::Key_CTRL) && m_player.isCTRLUnlocked())
+                if (m_player.getY() + 1 >= 0 && m_player.getY() + 1 < 50) m_player.moveBy(0, 1,m_cells[m_player.getX()][m_player.getY() + 1]);
+        }
+        if (m_player.isKeyPressed(Player::Key_D)) {
+            if (m_player.getX() + 1 >= 0 && m_player.getX() + 1 < 50) m_player.moveBy(1, 0, m_cells[m_player.getX() +1][m_player.getY()]);
+            if (m_player.isKeyPressed(Player::Key_CTRL) && m_player.isCTRLUnlocked())
+                if (m_player.getX() + 1 >= 0 && m_player.getX() + 1 < 50) m_player.moveBy(1, 0,m_cells[m_player.getX() + 1][m_player.getY()]);
+        }
     }
 }
 
@@ -105,5 +129,6 @@ void Map::tick() {
                 if(rand() % 10000 <= m_player.getLightChance()) m_cells[i][j].makeLight();
         }
     }
+    if(m_player.isShiftUnlocked() && m_player.isKeyPressed(Player::Key_SHIFT)) movePlayer();
     if(m_player.getAutomator().needCollect() && !m_player.getAutomator().isMaxed()) collectLight();
 }

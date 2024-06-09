@@ -16,7 +16,7 @@ int main() {
 
     RenderWindow window(VideoMode(830, 840), "Lightsed!");
 
-    font.loadFromFile("F:\\MyCodes\\Lightsed\\fonts\\VCR_OSD_MONO_1.001.ttf");
+    font.loadFromFile("./fonts/VCR_OSD_MONO_1.001.ttf");
     Map map;
     Clock clock;
 
@@ -26,10 +26,10 @@ int main() {
         while(window.pollEvent(event)) {
             if(event.type == Event::Closed)
                 window.close();
-            /*if (event.type == sf::Event::Resized) {
+            if (event.type == sf::Event::Resized) {
                 sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
                 window.setView(sf::View(visibleArea));
-            }*/
+            }
             if(event.type == Event::MouseMoved) {
                 Building** buildings = map.getBuildings();
                 for(int i=0; i<3; i++) {
@@ -55,20 +55,29 @@ int main() {
             if(event.type == Event::KeyPressed) {
                 if(event.key.code == Keyboard::W) {
                     map.getPlayer().setKey(Player::Key_W, true);
+                    map.getPlayer().setLastKeyPressed(Player::Key_W);
                     map.movePlayer();
                 }
                 if(event.key.code == Keyboard::A) {
                     map.getPlayer().setKey(Player::Key_A, true);
+                    map.getPlayer().setLastKeyPressed(Player::Key_A);
                     map.movePlayer();
                 }
                 if(event.key.code == Keyboard::S) {
                     map.getPlayer().setKey(Player::Key_S, true);
+                    map.getPlayer().setLastKeyPressed(Player::Key_S);
                     map.movePlayer();
                 }
                 if(event.key.code == Keyboard::D) {
                     map.getPlayer().setKey(Player::Key_D, true);
+                    map.getPlayer().setLastKeyPressed(Player::Key_D);
                     map.movePlayer();
                 }
+                if(event.key.code == Keyboard::LShift) {
+                    map.getPlayer().setKey(Player::Key_SHIFT, !map.getPlayer().isKeyPressed(Player::Key_SHIFT));
+                    map.movePlayer();
+                }
+                if(event.key.code == Keyboard::LControl) map.getPlayer().setKey(Player::Key_CTRL, true);
             }
             if(event.type == Event::KeyReleased) {
 
@@ -84,6 +93,7 @@ int main() {
                 if(event.key.code == Keyboard::D) {
                     map.getPlayer().setKey(Player::Key_D, false);
                 }
+                if(event.key.code == Keyboard::LControl) map.getPlayer().setKey(Player::Key_CTRL, false);
             }
         }
 

@@ -9,10 +9,10 @@ void Upgrade2Build1Func(UpgradeButton& but, Player& player) {
     player.setNXBoost(true);
 }
 void Upgrade3Build1Func(UpgradeButton& but, Player& player) {
-
+    player.unlockCTRL();
 }
 void Upgrade4Build1Func(UpgradeButton& but, Player& player) {
-
+    player.unlockShift();
 }
 
 void UpgradeChanceFunc(UpgradeButton& but, Player& player) {
